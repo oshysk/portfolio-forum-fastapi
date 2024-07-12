@@ -1,0 +1,23 @@
+services:
+  api:
+    build: .
+    volumes:
+      - ./src:/app/src
+      - ./tests:/app/tests
+      - /tmp # pytestがtmpディレクトリを作成するため追加
+    ports:
+      - 8000:8000
+  database:
+    image: mysql:8.0
+    platform: linux/x86_64 # AppleSiliconの場合必要
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: "forum"
+      TZ: "Asia/Tokyo"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password # MySQL8.0ではデフォルトが"caching_sha2_password"で、ドライバが非対応のため変更
+    ports:
+      - 3306:3306
+volumes:
+  mysql_data:
