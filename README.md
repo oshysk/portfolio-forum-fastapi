@@ -15,7 +15,7 @@ Docker環境で実行可能です。
 
 ## デモ
 
-![デモ画像](images/ReadmeDemoImage.png)
+![デモ画像](images/ReadMeDemoImage.png)
 
 ## 動作確認方法
 
