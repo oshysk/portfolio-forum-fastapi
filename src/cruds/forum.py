@@ -17,7 +17,9 @@ async def get_forums(
     """
     Model = forum_model.Forum
     # レコードを取得する。
-    database_result = await session.execute(select(Model))
+    database_result = await session.execute(
+        select(Model).order_by(Model.forum_id.desc())
+    )
     rows = database_result.scalars().all()
     # 返却オブジェクトを作成して返却する。
     schema = forum_schema.Forums(forums=list())
